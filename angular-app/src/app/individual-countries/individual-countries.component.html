@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row m-2">
+      <div class="col-md-10">
+        <img src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png" alt="Country Image" class="img-fluid" />
+      </div>
+      <div class="col-md-2">
+        <div class="row m-2">
+          <select class="form-select">
+            <option selected>Select a country</option>
+          </select>
+        </div>
+        <div class="row m-2">
+          <button type="button" class="btn btn-primary">Button 1</button>
+        </div>
+        <div class="row m-2">
+          <button type="button" class="btn btn-secondary">Button 2</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="hasImagePath" class="row">
+      <div class="col-md-12">
+        <img src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png" alt="Another Image" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+  
