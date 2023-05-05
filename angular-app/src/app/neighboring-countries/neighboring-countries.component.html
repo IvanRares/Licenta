@@ -1,48 +1,48 @@
 <div class="container">
-  <div class="row m-2">
-    <div class="col-md-10">
+  <div class="row border">
+    <div class="col m-2">
+      <select
+        class="form-select"
+        [(ngModel)]="selectedCountry"
+        (change)="onOptionChange()"
+      >
+        <option>Austria</option>
+        <option>France</option>
+        <option>Switzerland</option>
+      </select>
+    </div>
+    <div class="col m-2">
+      <button type="button" class="btn btn-primary" (click)="runDrawMap()">
+        Show map
+      </button>
+    </div>
+    <div class="col m-2">
+      <button type="button" class="btn btn-primary" (click)="showFirst6Weeks()">
+        Show First 6 Weeks
+      </button>
+    </div>
+    <div class="col m-2">
+      <button type="button" class="btn btn-primary" (click)="showPlots()">
+        Calculate Prediction
+      </button>
+    </div>
+    <div class="col m-2">
+      <button type="button" class="btn btn-primary" (click)="showComparisons()">
+        Show Comparison
+      </button>
+    </div>
+    <div class="col m-2">
+      <button type="button" class="btn btn-primary" (click)="showNeighbor()">
+        Show Total Cases vs Neighbors spread
+      </button>
+    </div>
+  </div>
+  <div *ngIf="showMap" class="row m-2">
+    <div class="col-md-12">
       <figure class="figure">
         <img [src]="drawMap" class="img-fluid" />
         <figcaption class="figure-caption text-center">Map</figcaption>
       </figure>
-    </div>
-    <div class="col-md-2">
-      <div class="row m-2">
-        <select
-          class="form-select"
-          [(ngModel)]="selectedCountry"
-          (change)="onOptionChange()"
-        >
-          <option>Austria</option>
-          <option>France</option>
-          <option>Switzerland</option>
-        </select>
-      </div>
-      <div class="row m-2">
-        <button type="button" class="btn btn-primary" (click)="runDrawMap()">
-          Show map
-        </button>
-      </div>
-      <div class="row m-2">
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="showFirst6Weeks()"
-        >
-          Show First 6 Weeks
-        </button>
-      </div>
-      <div class="row m-2">
-        <button type="button" class="btn btn-primary" (click)="showPlots()">
-          Calculate Prediction
-        </button>
-      </div>
-      <div class="row m-2">
-        <button type="button" class="btn btn-primary" (click)="showComparisons()">Show Comparison</button>
-      </div>
-      <div class="row m-2">
-        <button type="button" class="btn btn-primary" (click)="showNeighbor()">Show Total Cases vs Neighbors spread</button>
-      </div>
     </div>
   </div>
   <div *ngIf="showSpread" class="row">
@@ -87,7 +87,9 @@
     <div class="col-md-12">
       <figure class="figure">
         <img [src]="plots[4]" class="img-fluid" />
-        <figcaption class="figure-caption text-center">Total Cases vs Spread from neighbors</figcaption>
+        <figcaption class="figure-caption text-center">
+          Total Cases vs Spread from neighbors
+        </figcaption>
       </figure>
     </div>
   </div>

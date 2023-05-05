@@ -11,6 +11,7 @@ export class IndividualCountriesComponent {
   showPrediction: boolean = false;
   showSpread: boolean = false;
   showComparison: boolean = false;
+  showMap: boolean = false;
   selectedCountry: string = 'China';
   drawMap: SafeUrl | undefined;
   spreadMap: SafeUrl | undefined;
@@ -22,6 +23,7 @@ export class IndividualCountriesComponent {
       .callScript('run_draw_map', this.selectedCountry)
       .subscribe((imageUrls) => {
         this.drawMap = imageUrls[0];
+        this.showMap = true;
       });
   }
 
@@ -64,6 +66,7 @@ export class IndividualCountriesComponent {
     this.showPrediction = false;
     this.showSpread = false;
     this.showComparison = false;
+    this.showMap = false;
     this.plots = [];
     this.drawMap = undefined;
     this.spreadMap = undefined;

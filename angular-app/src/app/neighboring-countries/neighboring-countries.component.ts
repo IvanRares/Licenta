@@ -12,6 +12,7 @@ export class NeighboringCountriesComponent {
   showSpread: boolean = false;
   showComparison: boolean = false;
   showNeighborPrediction:boolean = false;
+  showMap:boolean = false;
   selectedCountry: string = 'Austria';
   drawMap: SafeUrl | undefined;
   spreadMap: SafeUrl | undefined;
@@ -23,6 +24,7 @@ export class NeighboringCountriesComponent {
       .callScript('run_draw_map', this.selectedCountry)
       .subscribe((imageUrls) => {
         this.drawMap = imageUrls[0];
+        this.showMap = true;
       });
   }
 
@@ -79,6 +81,7 @@ export class NeighboringCountriesComponent {
     this.showSpread = false;
     this.showComparison = false;
     this.showNeighborPrediction = false;
+    this.showMap = false;
     this.plots = [];
     this.drawMap = undefined;
     this.spreadMap = undefined;
