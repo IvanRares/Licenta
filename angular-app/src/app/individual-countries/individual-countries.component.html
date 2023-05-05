@@ -1,26 +1,83 @@
 <div class="container">
-    <div class="row m-2">
-      <div class="col-md-10">
-        <img src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png" alt="Country Image" class="img-fluid" />
-      </div>
-      <div class="col-md-2">
-        <div class="row m-2">
-          <select class="form-select">
-            <option selected>Select a country</option>
-          </select>
-        </div>
-        <div class="row m-2">
-          <button type="button" class="btn btn-primary">Button 1</button>
-        </div>
-        <div class="row m-2">
-          <button type="button" class="btn btn-secondary">Button 2</button>
-        </div>
-      </div>
+  <div class="row m-2">
+    <div class="col-md-10">
+      <figure class="figure">
+        <img [src]="drawMap" class="img-fluid" />
+        <figcaption class="figure-caption text-center">Map</figcaption>
+      </figure>
     </div>
-    <div *ngIf="hasImagePath" class="row">
-      <div class="col-md-12">
-        <img src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png" alt="Another Image" class="img-fluid" />
+    <div class="col-md-2">
+      <div class="row m-2">
+        <select
+          class="form-select"
+          [(ngModel)]="selectedCountry"
+          (change)="onOptionChange()"
+        >
+          <option>China</option>
+          <option>Germany</option>
+          <option>Italy</option>
+        </select>
+      </div>
+      <div class="row m-2">
+        <button type="button" class="btn btn-primary" (click)="runDrawMap()">
+          Show map
+        </button>
+      </div>
+      <div class="row m-2">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="showFirst6Weeks()"
+        >
+          Show First 6 Weeks
+        </button>
+      </div>
+      <div class="row m-2">
+        <button type="button" class="btn btn-primary" (click)="showPlots()">
+          Calculate Prediction
+        </button>
+      </div>
+      <div class="row m-2">
+        <button type="button" class="btn btn-primary" (click)="showComparisons()">Show Comparison</button>
       </div>
     </div>
   </div>
-  
+  <div *ngIf="showSpread" class="row">
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+      <figure class="figure">
+        <img [src]="spreadMap" class="img-fluid" />
+        <figcaption class="figure-caption text-center">Spread Map</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div *ngIf="showPrediction" class="row m-2">
+    <div class="col-md-6">
+      <figure class="figure">
+        <img [src]="plots[0]" class="img-fluid" />
+        <figcaption class="figure-caption text-center">
+          First 6 weeks
+        </figcaption>
+      </figure>
+    </div>
+    <div class="col-md-6">
+      <figure class="figure">
+        <img [src]="plots[1]" class="img-fluid" />
+        <figcaption class="figure-caption text-center">Last 2 Weeks</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div *ngIf="showComparison" class="row">
+    <div class="col-md-12">
+      <figure class="figure">
+        <img [src]="plots[2]" class="img-fluid" />
+        <figcaption class="figure-caption text-center">Actual</figcaption>
+      </figure>
+    </div>
+    <div class="col-md-12">
+      <figure class="figure">
+        <img [src]="plots[3]" class="img-fluid" />
+        <figcaption class="figure-caption text-center">Prediction</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
