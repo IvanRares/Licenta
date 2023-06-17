@@ -5,14 +5,17 @@ import { ScriptService } from '../script.service';
 @Component({
   selector: 'app-neighboring-countries',
   templateUrl: './neighboring-countries.component.html',
-  styleUrls: ['./neighboring-countries.component.scss']
+  styleUrls: ['./neighboring-countries.component.scss'],
 })
 export class NeighboringCountriesComponent {
   showPrediction: boolean = false;
   showSpread: boolean = false;
   showComparison: boolean = false;
-  showNeighborPrediction:boolean = false;
-  showMap:boolean = false;
+  showNeighborPrediction: boolean = false;
+  showMap: boolean = false;
+  mortalityRate: number = 0.21;
+  transmissionRate: number = 1.4;
+  incubationPeriod: number = 5.1;
   selectedCountry: string = 'Austria';
   drawMap: SafeUrl | undefined;
   spreadMap: SafeUrl | undefined;
@@ -21,7 +24,13 @@ export class NeighboringCountriesComponent {
 
   runDrawMap() {
     this.scriptService
-      .callScript('run_draw_map', this.selectedCountry)
+      .callScript(
+        'run_draw_map',
+        this.selectedCountry,
+        this.transmissionRate,
+        this.mortalityRate,
+        this.incubationPeriod
+      )
       .subscribe((imageUrls) => {
         this.drawMap = imageUrls[0];
         this.showMap = true;
@@ -30,7 +39,13 @@ export class NeighboringCountriesComponent {
 
   showFirst6Weeks() {
     this.scriptService
-      .callScript('run_spread_map_first_weeks', this.selectedCountry)
+      .callScript(
+        'run_spread_map_first_weeks',
+        this.selectedCountry,
+        this.transmissionRate,
+        this.mortalityRate,
+        this.incubationPeriod
+      )
       .subscribe((imageUrls) => {
         this.spreadMap = imageUrls[0];
         this.showSpread = true;
@@ -40,7 +55,13 @@ export class NeighboringCountriesComponent {
   showPlots() {
     if (this.plots.length == 0)
       this.scriptService
-        .callScript('run_plots', this.selectedCountry)
+        .callScript(
+          'run_plots',
+          this.selectedCountry,
+          this.transmissionRate,
+          this.mortalityRate,
+          this.incubationPeriod
+        )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showPrediction = true;
@@ -53,7 +74,13 @@ export class NeighboringCountriesComponent {
   showComparisons() {
     if (this.plots.length == 0)
       this.scriptService
-        .callScript('run_plots', this.selectedCountry)
+        .callScript(
+          'run_plots',
+          this.selectedCountry,
+          this.transmissionRate,
+          this.mortalityRate,
+          this.incubationPeriod
+        )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showComparison = true;
@@ -66,7 +93,13 @@ export class NeighboringCountriesComponent {
   showNeighbor() {
     if (this.plots.length == 0)
       this.scriptService
-        .callScript('run_plots', this.selectedCountry)
+        .callScript(
+          'run_plots',
+          this.selectedCountry,
+          this.transmissionRate,
+          this.mortalityRate,
+          this.incubationPeriod
+        )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showNeighborPrediction = true;

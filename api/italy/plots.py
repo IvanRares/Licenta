@@ -4,10 +4,11 @@ sys.path.append(str(Path(script_dir).resolve().parent.parent))
 from functions import calculate_ca, calculate_m, calculate_m_bar, calculate_p, calculate_p_bar, draw_color_map, find_q
 import numpy as np
 import pandas as pd
+import os
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('agg')
-alpha, beta, gamma = 0.24, 1.4, 1/5.1
+alpha, beta, gamma 
 output_image_paths=[]
 
 grid = np.array([
@@ -100,8 +101,8 @@ if not os.path.exists('..\images'):
     
 image_path = os.path.join('..\images', 'prediction_weeks_plot.png')
 
-plt.plot(range(prediction_days),pred_sums,label="pred")
 plt.plot(range(prediction_days),actual_sums,label="actual")
+plt.plot(range(prediction_days),pred_sums,label="pred")
 plt.legend()
 plt.savefig(image_path)
 plt.close()

@@ -4,7 +4,7 @@ sys.path.append(str(Path(script_dir).resolve().parent.parent))
 from functions import draw_map
 import numpy as np
 import pandas as pd
-alpha, beta, gamma = 0.24, 1.4, 1/5.1
+alpha, beta, gamma
 output_image_paths = []
 
 grid = np.array([

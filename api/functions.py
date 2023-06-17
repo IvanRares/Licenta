@@ -126,10 +126,11 @@ def calculate_p_bar(m_bar, alpha, beta, gamma, grid):
     west = np.zeros_like(m_bar)
     west[:, 1:] = m_bar[:, :-1]
     aux = np.stack(
-    [np.ones_like(m_bar),m_bar,north,east,south,west],axis=-1)
-    new_p=np.concatenate((aux[...,:1],
-                         aux[...,1:]*(beta-gamma-alpha)),axis=-1)
+    [np.ones_like(m_bar), m_bar, north, east, south, west], axis=-1)
+    new_p = np.concatenate((aux[..., :1],
+                         aux[..., 1:] * (beta - gamma - alpha)), axis=-1)
     return fix_p(new_p, grid)
+
 	
 def draw_map(grid,width,height):
     df = pd.DataFrame(grid)

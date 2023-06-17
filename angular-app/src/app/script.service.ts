@@ -10,11 +10,23 @@ export class ScriptService {
   baseUrl = 'http://localhost:5000/api/';
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
-  callScript(apiEndpoint: string, country: string): Observable<SafeUrl[]> {
+  callScript(
+    apiEndpoint: string,
+    country: string,
+    transmissionRate: number,
+    mortalityRate: number,
+    incubationPeriod: number
+  ): Observable<SafeUrl[]> {
+    const requestBody = {
+      country,
+      transmissionRate,
+      mortalityRate,
+      incubationPeriod,
+    };
     return this.http
       .post<{ success: boolean; images: string[] }>(
         this.baseUrl + apiEndpoint,
-        { country }
+        requestBody
       )
       .pipe(
         map((response) => {

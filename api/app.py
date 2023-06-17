@@ -14,7 +14,7 @@ def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
 
-def run_script(script):
+def run_script(script, transmission_rate, mortality_rate, incubation_period):
     original_cwd = os.getcwd()
     
     script_dir = os.path.dirname(script)
@@ -26,8 +26,14 @@ def run_script(script):
         
         with open(script, 'r') as script_file:
             script_contents = script_file.read()
-        
-        scripts_globals = {"output_image_paths": [], "script_dir": script_dir, "sys": sys}
+        scripts_globals = {
+            "output_image_paths": [],
+            "script_dir": script_dir,
+            "sys": sys,
+            "alpha": mortality_rate,
+            "beta": transmission_rate,
+            "gamma": 1 / incubation_period
+        }
         
         exec(script_contents, scripts_globals)
         
@@ -50,28 +56,37 @@ def run_script(script):
 def run_draw_map():
     data = request.get_json()
     country = data.get('country')
+    transmission_rate = data.get('transmissionRate')
+    mortality_rate = data.get('mortalityRate')
+    incubation_period = data.get('incubationPeriod')
     
     script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'{country.lower()}', 'draw_map.py')
     
-    return run_script(script_path)
+    return run_script(script_path,transmission_rate, mortality_rate, incubation_period)
     
 @app.route('/api/run_plots', methods=['POST'])
 def run_plots():
     data = request.get_json()
     country = data.get('country')
+    transmission_rate = data.get('transmissionRate')
+    mortality_rate = data.get('mortalityRate')
+    incubation_period = data.get('incubationPeriod')
     
     script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'{country.lower()}', 'plots.py')
     
-    return run_script(script_path)
+    return run_script(script_path,transmission_rate, mortality_rate, incubation_period)
     
 @app.route('/api/run_spread_map_first_weeks', methods=['POST'])
 def run_spread_map_first_weeks():
     data = request.get_json()
     country = data.get('country')
+    transmission_rate = data.get('transmissionRate')
+    mortality_rate = data.get('mortalityRate')
+    incubation_period = data.get('incubationPeriod')
     
     script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'{country.lower()}', 'spread_map_first_weeks.py')
     
-    return run_script(script_path)    
+    return run_script(script_path,transmission_rate, mortality_rate, incubation_period)
   
 if __name__ == '__main__':
     app.run(debug=True)

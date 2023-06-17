@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import os
 import matplotlib
 matplotlib.use('agg')
-alpha, beta, gamma = 0.24, 1.4, 1/5.1
+alpha, beta, gamma
 output_image_paths=[]
 
 germany_grid = np.array([
@@ -145,8 +145,8 @@ if not os.path.exists('..\images'):
     
 image_path = os.path.join('..\images', 'prediction_weeks_plot.png')
 
-plt.plot(range(prediction_days),pred_sums,label="pred")
 plt.plot(range(prediction_days),actual_sums,label="actual")
+plt.plot(range(prediction_days),pred_sums,label="pred")
 plt.legend()
 plt.savefig(image_path)
 plt.close()
@@ -172,8 +172,8 @@ if not os.path.exists('..\images'):
     
 image_path = os.path.join('..\images', 'spread_vs_total_cases.png')
 
-plt.plot(range(prediction_days),pred_sums,label="pred")
 plt.plot(range(prediction_days),actual_sums,label="actual")
+plt.plot(range(prediction_days),pred_sums,label="pred")
 plt.legend()
 plt.savefig(image_path)
 plt.close()

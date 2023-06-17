@@ -32,49 +32,89 @@
       </button>
     </div>
   </div>
+  <div class="row border mt-3">
+    <div class="col m-2">
+      <label for="mortalityRate" class="form-label">Mortality</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="mortalityRate"
+        placeholder="Mortality"
+      />
+    </div>
+    <div class="col m-2">
+      <label for="transmissionRate" class="form-label">Transmission</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="transmissionRate"
+        placeholder="Transmission"
+      />
+    </div>
+    <div class="col m-2">
+      <label for="incubationRate" class="form-label">Incubation</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="incubationPeriod"
+        placeholder="Incubation"
+      />
+    </div>
+  </div>
   <div *ngIf="showMap" class="row m-2">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
       <figure class="figure">
-        <img [src]="drawMap" class="img-fluid" />
+        <div class="d-flex justify-content-center">
+          <img [src]="drawMap" class="img-fluid" />
+        </div>
         <figcaption class="figure-caption text-center">Map</figcaption>
       </figure>
     </div>
-    
   </div>
   <div *ngIf="showSpread" class="row">
-    <div class="col-md-12 d-flex justify-content-center align-items-center">
+    <div class="col-md-12 text-center">
       <figure class="figure">
+        <div class="d-flex justify-content-center">
         <img [src]="spreadMap" class="img-fluid" />
+        </div>
         <figcaption class="figure-caption text-center">Spread Map</figcaption>
       </figure>
     </div>
   </div>
   <div *ngIf="showPrediction" class="row m-2">
-    <div class="col-md-6">
+    <div class="col-md-6 text-center">
       <figure class="figure">
+        <div class="d-flex justify-content-center">
         <img [src]="plots[0]" class="img-fluid" />
+        </div>
         <figcaption class="figure-caption text-center">
           First 6 weeks
         </figcaption>
       </figure>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-center">
       <figure class="figure">
+        <div class="d-flex justify-content-center">
         <img [src]="plots[1]" class="img-fluid" />
+        </div>
         <figcaption class="figure-caption text-center">Last 2 Weeks</figcaption>
       </figure>
     </div>
   </div>
   <div *ngIf="showComparison" class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
       <figure class="figure">
+        <div class="d-flex justify-content-center">
         <img [src]="plots[2]" class="img-fluid" />
+        </div>
         <figcaption class="figure-caption text-center">Actual</figcaption>
       </figure>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
       <figure class="figure">
+        <div class="d-flex justify-content-center">
         <img [src]="plots[3]" class="img-fluid" />
+        </div>
         <figcaption class="figure-caption text-center">Prediction</figcaption>
       </figure>
     </div>

@@ -12,6 +12,9 @@ export class IndividualCountriesComponent {
   showSpread: boolean = false;
   showComparison: boolean = false;
   showMap: boolean = false;
+  mortalityRate: number = 0.21;
+  transmissionRate: number = 1.4;
+  incubationPeriod: number = 5.1;
   selectedCountry: string = 'China';
   drawMap: SafeUrl | undefined;
   spreadMap: SafeUrl | undefined;
@@ -20,7 +23,13 @@ export class IndividualCountriesComponent {
 
   runDrawMap() {
     this.scriptService
-      .callScript('run_draw_map', this.selectedCountry)
+      .callScript(
+        'run_draw_map',
+        this.selectedCountry,
+        this.transmissionRate,
+        this.mortalityRate,
+        this.incubationPeriod
+      )
       .subscribe((imageUrls) => {
         this.drawMap = imageUrls[0];
         this.showMap = true;
@@ -29,7 +38,13 @@ export class IndividualCountriesComponent {
 
   showFirst6Weeks() {
     this.scriptService
-      .callScript('run_spread_map_first_weeks', this.selectedCountry)
+      .callScript(
+        'run_spread_map_first_weeks',
+        this.selectedCountry,
+        this.transmissionRate,
+        this.mortalityRate,
+        this.incubationPeriod
+      )
       .subscribe((imageUrls) => {
         this.spreadMap = imageUrls[0];
         this.showSpread = true;
@@ -39,7 +54,13 @@ export class IndividualCountriesComponent {
   showPlots() {
     if (this.plots.length == 0)
       this.scriptService
-        .callScript('run_plots', this.selectedCountry)
+        .callScript(
+          'run_plots',
+          this.selectedCountry,
+          this.transmissionRate,
+          this.mortalityRate,
+          this.incubationPeriod
+        )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showPrediction = true;
@@ -52,7 +73,13 @@ export class IndividualCountriesComponent {
   showComparisons() {
     if (this.plots.length == 0)
       this.scriptService
-        .callScript('run_plots', this.selectedCountry)
+        .callScript(
+          'run_plots',
+          this.selectedCountry,
+          this.transmissionRate,
+          this.mortalityRate,
+          this.incubationPeriod
+        )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showComparison = true;
