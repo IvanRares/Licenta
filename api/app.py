@@ -30,9 +30,9 @@ def run_script(script, transmission_rate, mortality_rate, incubation_period):
             "output_image_paths": [],
             "script_dir": script_dir,
             "sys": sys,
-            "alpha": mortality_rate,
-            "beta": transmission_rate,
-            "gamma": 1 / incubation_period
+            "mortality_rate": mortality_rate,
+            "transmission_rate": transmission_rate,
+            "incubation_period": 1 / incubation_period
         }
         
         exec(script_contents, scripts_globals)

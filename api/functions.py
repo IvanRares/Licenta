@@ -6,6 +6,8 @@ import sklearn.linear_model
 import copy
 import os
 import matplotlib
+from sklearn.metrics import mean_squared_error
+from math import sqrt
 matplotlib.use('agg')
 
 def calculate_ca(days,grid,data, regions):
@@ -225,4 +227,33 @@ def draw_color_map(grid, ca_infected, number_of_weeks, width, height, name):
     plt.savefig(image_path)
     plt.close()
     
+    return image_path
+    
+def calculate_error_per_cell(grid, regions, actual, prediction):
+    region_rmse = {}
+    for region_id in regions['ID'].unique():
+        mask = (grid == region_id)
+        actual_region = actual[:, mask]
+        prediction_region = prediction[:, mask]
+        if actual_region.size == 0 or prediction_region.size == 0:
+            continue
+        rmse = sqrt(mean_squared_error(actual_region.flatten(), prediction_region.flatten()))
+        cell_count = regions.loc[regions['ID'] == region_id, 'Cell Count'].values[0]
+        normalized_rmse = rmse / cell_count
+        region_name = regions.loc[regions['ID'] == region_id, 'Region'].values[0]
+        region_rmse[region_name] = normalized_rmse
+    df_rmse = pd.DataFrame(list(region_rmse.items()), columns=['Region', 'RMSE'])
+    plt.figure(figsize=(10, 6))
+    plt.plot(df_rmse['Region'], df_rmse['RMSE'], marker='o', linestyle='-', color='blue')
+    plt.xlabel('Region')
+    plt.ylabel('Error per cell')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    if not os.path.exists('..\images'):
+        os.makedirs('..\images')
+        
+    image_path = os.path.join('..\images', 'error_per_cell_per_region.png')
+
+    plt.savefig(image_path)
+    plt.close()
     return image_path

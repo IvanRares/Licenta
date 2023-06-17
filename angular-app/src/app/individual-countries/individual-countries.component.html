@@ -1,4 +1,8 @@
+<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
 <div class="container">
+  <ngx-loading
+    [show]="loading">
+  </ngx-loading>
   <div class="row border">
     <div class="col m-2">
       <select
@@ -29,6 +33,11 @@
     <div class="col m-2">
       <button type="button" class="btn btn-primary" (click)="showComparisons()">
         Show Comparison
+      </button>
+    </div>
+    <div class="col m-2">
+      <button type="button" class="btn btn-primary" (click)="showErrors()">
+        Show Errors
       </button>
     </div>
   </div>
@@ -72,20 +81,28 @@
     </div>
   </div>
   <div *ngIf="showSpread" class="row">
-    <div class="col-md-12 text-center">
-      <figure class="figure">
-        <div class="d-flex justify-content-center">
-        <img [src]="spreadMap" class="img-fluid" />
+    <div class="col-md-12">
+      <div class="d-flex justify-content-center align-items-center">
+        <figure class="figure">
+          <div class="d-flex justify-content-center">
+            <img [src]="spreadMap" class="img-fluid" />
+          </div>
+          <figcaption class="figure-caption text-center">Spread Map</figcaption>
+        </figure>
+  
+        <div class="d-flex flex-column align-items-center">
+          <img src="../../assets/legend.png" alt="Legend" class="img-fluid legend-img" />
+          <span class="legend-caption text-center">Legend</span>
         </div>
-        <figcaption class="figure-caption text-center">Spread Map</figcaption>
-      </figure>
+      </div>
     </div>
   </div>
+  
   <div *ngIf="showPrediction" class="row m-2">
     <div class="col-md-6 text-center">
       <figure class="figure">
         <div class="d-flex justify-content-center">
-        <img [src]="plots[0]" class="img-fluid" />
+          <img [src]="plots[0]" class="img-fluid" />
         </div>
         <figcaption class="figure-caption text-center">
           First 6 weeks
@@ -95,7 +112,7 @@
     <div class="col-md-6 text-center">
       <figure class="figure">
         <div class="d-flex justify-content-center">
-        <img [src]="plots[1]" class="img-fluid" />
+          <img [src]="plots[1]" class="img-fluid" />
         </div>
         <figcaption class="figure-caption text-center">Last 2 Weeks</figcaption>
       </figure>
@@ -105,7 +122,7 @@
     <div class="col-md-12 text-center">
       <figure class="figure">
         <div class="d-flex justify-content-center">
-        <img [src]="plots[2]" class="img-fluid" />
+          <img [src]="plots[2]" class="img-fluid" />
         </div>
         <figcaption class="figure-caption text-center">Actual</figcaption>
       </figure>
@@ -113,9 +130,28 @@
     <div class="col-md-12 text-center">
       <figure class="figure">
         <div class="d-flex justify-content-center">
-        <img [src]="plots[3]" class="img-fluid" />
+          <img [src]="plots[3]" class="img-fluid" />
         </div>
         <figcaption class="figure-caption text-center">Prediction</figcaption>
+      </figure>
+    </div>
+    <div class="col-md-12 text-center">
+      <figure class="figure">
+        <div class="d-flex justify-content-center">
+          <img src="../../assets/legend.png" alt="Legend" class="img-fluid legend-img" />
+        </div>
+        <figcaption class="figure-caption text-center">Legend</figcaption>
+      </figure>
+    </div>
+  </div>
+  
+  <div *ngIf="showError" class="row">
+    <div class="col-md-12 text-center">
+      <figure class="figure">
+        <div class="d-flex justify-content-center">
+          <img [src]="plots[4]" class="img-fluid" />
+        </div>
+        <figcaption class="figure-caption text-center">Error Map</figcaption>
       </figure>
     </div>
   </div>

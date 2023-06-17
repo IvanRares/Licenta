@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 import os
 import matplotlib
 matplotlib.use('agg')
-alpha, beta, gamma
+alpha, beta, gamma = 0.21, 1.4, 1/5.1
+mortality_rate, transmission_rate, incubation_period
 output_image_paths=[]
 
 germany_grid = np.array([
@@ -101,6 +102,9 @@ delta_I = np.diff(ca_infected, axis=0)
 p=calculate_p(ca_infected, grid, alpha, beta, gamma)
 
 q = find_q(delta_I, p, grid)
+
+p=calculate_p(ca_infected, grid, mortality_rate, transmission_rate, incubation_period)
+
 indices=np.where(grid==36)
 q[indices]=np.random.uniform(-0.01, 0.1, size=(len(indices[0]),6))
 
@@ -134,7 +138,7 @@ prediction=np.zeros((prediction_days,grid.shape[0],grid.shape[1]))
 for i in range(1,prediction_days):
     m_bar=calculate_m_bar(m, grid)
     prediction[i-1]=m_bar
-    p_bar=calculate_p_bar(m_bar, alpha, beta, gamma, grid)
+    p_bar=calculate_p_bar(m_bar, mortality_rate, transmission_rate, incubation_period, grid)
     m=calculate_m(m_bar,p_bar,q)
 prediction[-1]=calculate_m_bar(m, grid) 
 pred_sums=[prediction[i].sum()/258 for i in range(prediction_days)]

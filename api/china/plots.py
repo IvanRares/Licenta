@@ -1,14 +1,15 @@
 import sys
 from pathlib import Path
 sys.path.append(str(Path(script_dir).resolve().parent.parent))
-from functions import calculate_ca, calculate_m, calculate_m_bar, calculate_p, calculate_p_bar, draw_color_map, find_q
+from functions import calculate_ca, calculate_m, calculate_m_bar, calculate_p, calculate_p_bar, draw_color_map, find_q, calculate_error_per_cell
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import matplotlib
 matplotlib.use('agg')
-alpha, beta, gamma 
+alpha, beta, gamma = 0.21, 1.4, 1/5.1
+mortality_rate, transmission_rate, incubation_period
 output_image_paths = []
 grid = np.array([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -64,6 +65,8 @@ p=calculate_p(ca_infected, grid, alpha, beta, gamma)
 
 q = find_q(delta_I, p, grid)
 
+p=calculate_p(ca_infected, grid, mortality_rate, transmission_rate, incubation_period)
+
 _,counts=np.unique(grid,return_counts=True)
 total_cells=counts[1:].sum()
 prediction=np.zeros((days,grid.shape[0],grid.shape[1]))
@@ -95,7 +98,7 @@ prediction=np.zeros((prediction_days,grid.shape[0],grid.shape[1]))
 for i in range(1,prediction_days):
     m_bar=calculate_m_bar(m, grid)
     prediction[i-1]=m_bar
-    p_bar=calculate_p_bar(m_bar, alpha, beta, gamma, grid)
+    p_bar=calculate_p_bar(m_bar, mortality_rate, transmission_rate, incubation_period, grid)
     m=calculate_m(m_bar,p_bar,q)
 prediction[-1]=calculate_m_bar(m, grid) 
 pred_sums=[prediction[i].sum()/258 for i in range(prediction_days)]
@@ -122,4 +125,6 @@ image_path = draw_color_map(grid,prediction,2,20,4,'prediction_weeks_map.png')
 
 output_image_paths.append(image_path)
 
+image_path = calculate_error_per_cell(grid, regions, actual, prediction)
 
+output_image_paths.append(image_path)

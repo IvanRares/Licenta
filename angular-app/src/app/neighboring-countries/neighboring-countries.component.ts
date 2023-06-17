@@ -8,6 +8,7 @@ import { ScriptService } from '../script.service';
   styleUrls: ['./neighboring-countries.component.scss'],
 })
 export class NeighboringCountriesComponent {
+  public loading = false;
   showPrediction: boolean = false;
   showSpread: boolean = false;
   showComparison: boolean = false;
@@ -23,6 +24,7 @@ export class NeighboringCountriesComponent {
   constructor(private scriptService: ScriptService) {}
 
   runDrawMap() {
+    this.loading = true;
     this.scriptService
       .callScript(
         'run_draw_map',
@@ -34,10 +36,12 @@ export class NeighboringCountriesComponent {
       .subscribe((imageUrls) => {
         this.drawMap = imageUrls[0];
         this.showMap = true;
+        this.loading = false;
       });
   }
 
   showFirst6Weeks() {
+    this.loading = true;
     this.scriptService
       .callScript(
         'run_spread_map_first_weeks',
@@ -49,10 +53,12 @@ export class NeighboringCountriesComponent {
       .subscribe((imageUrls) => {
         this.spreadMap = imageUrls[0];
         this.showSpread = true;
+        this.loading = false;
       });
   }
 
   showPlots() {
+    this.loading = true;
     if (this.plots.length == 0)
       this.scriptService
         .callScript(
@@ -65,13 +71,16 @@ export class NeighboringCountriesComponent {
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showPrediction = true;
+          this.loading = false;
         });
     else {
       this.showPrediction = true;
+      this.loading = false;
     }
   }
 
   showComparisons() {
+    this.loading = true;
     if (this.plots.length == 0)
       this.scriptService
         .callScript(
@@ -84,13 +93,16 @@ export class NeighboringCountriesComponent {
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showComparison = true;
+          this.loading = false;
         });
     else {
       this.showComparison = true;
+      this.loading = false;
     }
   }
 
   showNeighbor() {
+    this.loading = true;
     if (this.plots.length == 0)
       this.scriptService
         .callScript(
@@ -103,9 +115,11 @@ export class NeighboringCountriesComponent {
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showNeighborPrediction = true;
+          this.loading = false;
         });
     else {
       this.showNeighborPrediction = true;
+      this.loading = false;
     }
   }
 
