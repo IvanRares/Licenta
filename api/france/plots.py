@@ -134,8 +134,8 @@ if not os.path.exists('..\images'):
     
 image_path = os.path.join('..\images', 'first_weeks_plot.png')
 
-plt.plot(range(days),sums,label="actual")
-plt.plot(range(days),pred_sums,label="pred")
+plt.plot(range(days),sums,label="Actual data")
+plt.plot(range(days),pred_sums,label="Prediction")
 plt.legend()
 plt.savefig(image_path)
 plt.close()
@@ -158,8 +158,8 @@ if not os.path.exists('..\images'):
     
 image_path = os.path.join('..\images', 'prediction_weeks_plot.png')
 
-plt.plot(range(prediction_days),actual_sums,label="actual")
-plt.plot(range(prediction_days),pred_sums,label="pred")
+plt.plot(range(prediction_days),actual_sums,label="Actual data")
+plt.plot(range(prediction_days),pred_sums,label="Prediction")
 plt.legend()
 plt.savefig(image_path)
 plt.close()
@@ -185,8 +185,8 @@ if not os.path.exists('..\images'):
     
 image_path = os.path.join('..\images', 'spread_vs_total_cases.png')
 
-plt.plot(range(prediction_days),actual_sums,label="actual")
-plt.plot(range(prediction_days),pred_sums,label="pred")
+plt.plot(range(prediction_days),actual_sums,label="Total cases")
+plt.plot(range(prediction_days),pred_sums,label="Cases from neighboring countries")
 plt.legend()
 plt.savefig(image_path)
 plt.close()

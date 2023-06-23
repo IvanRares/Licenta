@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxLoadingModule } from 'ngx-loading';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgxLoadingModule
+    NgxLoadingModule,
+    NgxImageZoomModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

@@ -35,6 +35,10 @@ export class NeighboringCountriesComponent {
       )
       .subscribe((imageUrls) => {
         this.drawMap = imageUrls[0];
+        this.showPrediction = false;
+        this.showSpread = false;
+        this.showComparison = false;
+        this.showNeighborPrediction = false;
         this.showMap = true;
         this.loading = false;
       });
@@ -52,7 +56,11 @@ export class NeighboringCountriesComponent {
       )
       .subscribe((imageUrls) => {
         this.spreadMap = imageUrls[0];
+        this.showPrediction = false;
         this.showSpread = true;
+        this.showComparison = false;
+        this.showNeighborPrediction = false;
+        this.showMap = false;
         this.loading = false;
       });
   }
@@ -71,10 +79,18 @@ export class NeighboringCountriesComponent {
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
           this.showPrediction = true;
+          this.showSpread = false;
+          this.showComparison = false;
+          this.showNeighborPrediction = false;
+          this.showMap = false;
           this.loading = false;
         });
     else {
       this.showPrediction = true;
+      this.showSpread = false;
+      this.showComparison = false;
+      this.showNeighborPrediction = false;
+      this.showMap = false;
       this.loading = false;
     }
   }
@@ -92,11 +108,19 @@ export class NeighboringCountriesComponent {
         )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
+          this.showPrediction = false;
+          this.showSpread = false;
           this.showComparison = true;
+          this.showNeighborPrediction = false;
+          this.showMap = false;
           this.loading = false;
         });
     else {
+      this.showPrediction = false;
+      this.showSpread = false;
       this.showComparison = true;
+      this.showNeighborPrediction = false;
+      this.showMap = false;
       this.loading = false;
     }
   }
@@ -114,11 +138,19 @@ export class NeighboringCountriesComponent {
         )
         .subscribe((imageUrls) => {
           this.plots = imageUrls;
+          this.showPrediction = false;
+          this.showSpread = false;
+          this.showComparison = false;
           this.showNeighborPrediction = true;
+          this.showMap = false;
           this.loading = false;
         });
     else {
+      this.showPrediction = false;
+      this.showSpread = false;
+      this.showComparison = false;
       this.showNeighborPrediction = true;
+      this.showMap = false;
       this.loading = false;
     }
   }
